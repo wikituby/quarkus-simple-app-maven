@@ -9,16 +9,48 @@ import org.acme.simplequarkusapps.loancalculator.statics.TimeInterval;
 @ApplicationScoped
 public class LoanService {
 
-    public void deliverPrincipal(double rate, double amount) {
+    public void deliverPrincipal(double ratec, double amountc) {
+        Loan loan = new Loan();
+        loan.setRate(ratec);
+        loan.setAmount(amountc);
+        loan.calculatePrincipal();
+        //return String.format("Principal = %.2f,", loan.getPrincipal());
+
+    }
+    public String printOut(){
+        Loan loan = new Loan();
+        return String.format("rate = %.2f, amount = %.2f", loan.getRate(), loan.getAmount());
+
+    }
+
+    public String customPrincipal(double rate, double interest) {
         Loan loan = new Loan();
         loan.setRate(rate);
-        loan.setAmount(amount);
-  }
+        loan.setInterest(interest);
+        loan.calculatePrincipalCustom();
+        return String.format("Principal = %.2f,", loan.getPrincipal());
 
-    public TimeOption getLoanTime(int intervalOption, int time) {
+    }
+
+
+    public TimeOption getLoanTime(int intervalOptionc, int timec) {
 
         TimeOption timeOption = new TimeOption();
-       switch (intervalOption) {
+        if(intervalOptionc==1){
+            timeOption.setPeriod(TimeInterval.YEARLY);
+        } else {
+            if (intervalOptionc==2){
+                timeOption.setPeriod(TimeInterval.MONTHLY);
+            }else{
+                if(intervalOptionc==3){
+                    timeOption.setPeriod(TimeInterval.WEEKLY);
+                }else {
+
+                }
+
+            }
+        }
+        switch (intervalOptionc) {
             case 1 -> timeOption.setPeriod(TimeInterval.YEARLY);
             case 2 -> timeOption.setPeriod(TimeInterval.MONTHLY);
             case 3 -> timeOption.setPeriod(TimeInterval.WEEKLY);
@@ -26,7 +58,7 @@ public class LoanService {
             default -> timeOption.getInvalidOption();
         }
 
-        timeOption.setTime(time);
+        timeOption.setTime(timec);
 
         return timeOption;
     }
@@ -41,7 +73,6 @@ public class LoanService {
         Loan loan = new Loan();
         loan.setPrincipal(amountBorrowed);
         loan.setAmount(amount);
-
         loan.calculateRate();
         return String.format("Rate Per Month = %.2f,", loan.getRate());
 

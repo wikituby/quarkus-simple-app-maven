@@ -1,5 +1,7 @@
 package org.acme.simplequarkusapps.nssfcalculator.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.acme.simplequarkusapps.nssfcalculator.models.Nssf;
 
@@ -8,28 +10,40 @@ public class NssfService {
 
     public String nssfRatesAndInfo() {
         Nssf nssfObj = new Nssf();
-        return nssfObj.getNssInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            // Create a JSON object with a single property
+            Object json = objectMapper.createObjectNode().put("nssInfo", nssfObj.getNssInfo());
+
+            // Convert the JSON object to a formatted JSON string
+            String jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
+
+            System.out.println(jsonString);
+            return jsonString;
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public String calculateNssfContribution(double grossPay) {
+    public Nssf calculateNssfContribution(double grossPay) {
         Nssf nssfObj = new Nssf();
         nssfObj.setGrossPay(grossPay);
         nssfObj.calculateNssfContribution();
-        return String.format("Employee Nssf contribution = %.2f,Employer Nssf contribution = %.2f, Nssf total Contribution = %.2f,", nssfObj.getEmployeeNssfContribution(), nssfObj.getEmployerNssfContribution(), nssfObj.getNssfTotalContribution());
+        return nssfObj;
     }
 
-    public String calculateGrossPay(double employerNssfContribution) {
+    public Nssf calculateGrossPay(double employerNssfContribution) {
         Nssf nssfObj = new Nssf();
         nssfObj.setEmployerNssfContribution(employerNssfContribution);
         nssfObj.calculateGrossPay();
-        return String.format("GrossPay = %.2f", nssfObj.getGrossPay());
+        return nssfObj;
     }
 
-    public String calculateNetPay(double grossPay) {
+    public Nssf calculateNetPay(double grossPay) {
         Nssf nssfObj = new Nssf();
         nssfObj.setGrossPay(grossPay);
         nssfObj.calculateNetPay();
-        return String.format("Employee NetPay = %.2f, Employee Nssf Contribution= %.2f,", nssfObj.getNetPay(), nssfObj.getEmployeeNssfContribution());
+        return nssfObj;
     }
 
 }

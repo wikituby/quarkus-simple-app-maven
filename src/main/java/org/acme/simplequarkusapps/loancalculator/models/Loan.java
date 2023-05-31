@@ -115,4 +115,8 @@ public class Loan {
         this.principal = this.amount / ((this.rate * 0.01 * this.term) + 1);
     }
 
+    public void calculatePrincipalCustom(){
+        this.principal = this.interest/(this.rate/100);
+    }
+
 }

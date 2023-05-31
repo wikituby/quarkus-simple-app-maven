@@ -21,10 +21,8 @@ public class Nssf {
                 1. Nssf Employer Contribution = 10% of GrossPay
                 2. Nssf Employee Contribution = 5% of GrossPay
                 3. Total Nssf Contribution from Employee and Employer = 15% of GrossPay.
-                
-
+              
                 """;
-
 
     //constructors
     public Nssf() {

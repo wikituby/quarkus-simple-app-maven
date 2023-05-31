@@ -84,6 +84,7 @@ public class Vat {
     public void calculateVatAmount() {
         this.vatRate = 0.18;
         this.vatAmount = this.taxableAmount * this.vatRate;
+        this.totalAmount = this.taxableAmount + this.vatAmount;
     }
 
     public void calculateVatRate() {
