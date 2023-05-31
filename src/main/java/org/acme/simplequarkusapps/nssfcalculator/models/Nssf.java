@@ -13,7 +13,6 @@ public class Nssf {
     private double nssfTotalContribution;
     public final double EMPLOYEE_RATE = 0.05;
     public final double EMPLOYER_RATE = 0.1;
-    //public String nssInfo;
     public String nssInfo = """
 
                 NSSF Rates and General Info.
