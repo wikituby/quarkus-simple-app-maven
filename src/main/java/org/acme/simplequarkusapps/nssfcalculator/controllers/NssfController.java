@@ -19,13 +19,13 @@ public class NssfController {
     @Inject
     NssfService nssfService;
 
-    @GET
+    /*@GET
     @Path("/rates-and-info")
     @Operation(summary = "shows all the detailed info about NSSF Contributions", description = "This endpoint gives all the detailed info about NSSF.")
     @Produces(MediaType.APPLICATION_JSON)
     public String nssfRatesAndInfo() {
         return nssfService.nssfRatesAndInfo();
-    }
+    }*/
 
     @GET
     @Path("/contributions")

@@ -8,7 +8,9 @@ import org.acme.simplequarkusapps.nssfcalculator.models.Nssf;
 @ApplicationScoped
 public class NssfService {
 
-    public String nssfRatesAndInfo() {
+
+
+    /*public String nssfRatesAndInfo() {
         Nssf nssfObj = new Nssf();
         ObjectMapper objectMapper = new ObjectMapper();
         try {
@@ -23,7 +25,7 @@ public class NssfService {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     public Nssf calculateNssfContribution(double grossPay) {
         Nssf nssfObj = new Nssf();

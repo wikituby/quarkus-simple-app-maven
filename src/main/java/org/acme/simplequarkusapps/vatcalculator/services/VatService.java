@@ -16,7 +16,6 @@ public class VatService {
         return vatObj;
     }
 
-
     public Vat calculateVatRate(double taxableAmount, double vatAmount) {
         Vat vatObj = new Vat();
         vatObj.setTaxableAmount(taxableAmount);
@@ -38,11 +37,7 @@ public class VatService {
         vatObj.calculateTotalAmount();
         return vatObj;
     }
-
-    /*public String vatInfo() {
-        Vat vatObj = new Vat();
-        return vatObj.getVatInfo();
-    }*/
+    
 
     public String vatInfo() {
         Vat vatObj = new Vat();

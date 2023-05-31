@@ -6,11 +6,11 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class Nssf {
 
     //fields
+    private double grossPay;
     private double netPay;
     private double employeeNssfContribution;
     private double employerNssfContribution;
     private double nssfTotalContribution;
-    private double grossPay;
     public final double EMPLOYEE_RATE = 0.05;
     public final double EMPLOYER_RATE = 0.1;
     //public String nssInfo;
@@ -38,6 +38,7 @@ public class Nssf {
     }
 
     //getters anf setters
+
     public String getNssInfo() {
         //return "1: Nssf Employer Contribution = 10% of GrossPay.\n2: Nssf Employee Contribution = 5% of GrossPay\n3: Total Nssf Contribution from Employee and Employer = 15% of GrossPay";
         return nssInfo;
