@@ -3,6 +3,8 @@ package org.acme.simplequarkusapps.loancalculator.controllers;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import org.acme.simplequarkusapps.loancalculator.models.Loan;
+import org.acme.simplequarkusapps.loancalculator.models.TimeOption;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.acme.simplequarkusapps.loancalculator.services.LoanService;
@@ -15,72 +17,48 @@ public class LoanController {
     LoanService loanService;
 
     @GET
-    @Path("/principal")
-    @Operation(summary = "calculate interest in a given period", description = "This will calculate interest in any time period given.")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String calculatePrincipal(
-            @QueryParam("ratec") double ratec,
-            @QueryParam("amountc") double amountc,
-            @QueryParam("timec") int timec,
-            @QueryParam("intervalOptionc") int intervalOptionc) {
-        loanService.deliverPrincipal(ratec, amountc);
-        loanService.getLoanTime(intervalOptionc, timec);
-        return loanService.printOut();
-
+    @Path("/monthly-payments")
+    @Operation(summary = "monthly-payments", description = "This will calculate interest in any time period given.")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Loan calculateMonthlyPayments(
+            @QueryParam("principal") double principal,
+            @QueryParam("ratePerMonth") double ratePerMonth,
+            @QueryParam("intervalOption") int intervalOption,
+            @QueryParam("time") int time) {
+        return loanService.calculateMonthlyPayments(principal,ratePerMonth, intervalOption, time );
     }
-    @PUT
-    @Path("/principal")
-    @Operation(summary = "calculate interest in a given period", description = "This will calculate interest in any time period given.")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String samplePut(
-            @QueryParam("ratec") double ratec,
-            @QueryParam("amountc") double amountc,
-            @QueryParam("timec") int timec,
-            @QueryParam("intervalOptionc") int intervalOptionc) {
-        loanService.deliverPrincipal(ratec, amountc);
-        loanService.getLoanTime(intervalOptionc, timec);
-        return loanService.printOut();
-
-    }
-    @DELETE
-    @Path("/principal")
-    @Operation(summary = "calculate interest in a given period", description = "This will calculate interest in any time period given.")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String sampleDelete(
-            @QueryParam("ratec") double ratec,
-            @QueryParam("amountc") double amountc,
-            @QueryParam("timec") int timec,
-            @QueryParam("intervalOptionc") int intervalOptionc) {
-        loanService.deliverPrincipal(ratec, amountc);
-        loanService.getLoanTime(intervalOptionc, timec);
-        return loanService.printOut();
-
-    }
-
-    @POST
-    @Path("/principal")
-    @Operation(summary = "calculate interest in a given period", description = "This will calculate interest in any time period given.")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String samplePost(
-            @QueryParam("ratec") double ratec,
-            @QueryParam("amountc") double amountc,
-            @QueryParam("timec") int timec,
-            @QueryParam("intervalOptionc") int intervalOptionc) {
-        loanService.deliverPrincipal(ratec, amountc);
-        loanService.getLoanTime(intervalOptionc, timec);
-        return loanService.printOut();
-
+    @GET
+    @Path("/rate-from-given-amount")
+    @Operation(summary = "Rate from given Amount", description = "Rate from given Amount.")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Loan calculateRateFromGivenAmount(
+            @QueryParam("principal") double principal,
+            @QueryParam("amount") double amount,
+            @QueryParam("intervalOption") int intervalOption,
+            @QueryParam("time") int time) {
+        return loanService.calculateRateFromGivenAmount(principal,amount, intervalOption, time );
     }
 
     @GET
-    @Path("/custom-principal")
-    @Operation(summary = "calculate interest in a given period", description = "This will calculate interest in any time period given.")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String customPrincipal(
-            @QueryParam("rate") double rate,
-            @QueryParam("interest") double interest) {
-        return loanService.customPrincipal(rate, interest);
+    @Path("/principal")
+    @Operation(summary = "principal", description = "Rate from given Amount.")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Loan calculatePrincipal(
+            @QueryParam("rate per month(%)") double rate,
+            @QueryParam("amount") double amount,
+            @QueryParam("intervalOption") int intervalOption,
+            @QueryParam("time") int time) {
+        return loanService.calculatePrincipal(rate,amount, intervalOption, time );
+    }
 
+   /* @GET
+    @Path("/time-option")
+    @Operation(summary = "time-option", description = "This will calculate interest in any time period given.")
+    @Produces(MediaType.APPLICATION_JSON)
+    public TimeOption getLoanTime(
+            @QueryParam("intervalOption") int intervalOption,
+            @QueryParam("time") int time) {
+        return loanService.getLoanTime(intervalOption, time);
     }
 
     @GET
@@ -93,6 +71,6 @@ public class LoanController {
             @QueryParam("time") double time,
             @QueryParam("intervalOption") int intervalOption) {
         return loanService.calculateRate(amountBorrowed, amount, time, intervalOption);
-    }
+    }*/
 
 }

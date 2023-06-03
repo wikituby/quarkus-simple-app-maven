@@ -3,9 +3,7 @@ package org.acme.simplequarkusapps.loancalculator.models;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.acme.simplequarkusapps.loancalculator.statics.TimeInterval;
 
-
 @ApplicationScoped
-
 public class Loan {
 
     private double amount;
@@ -113,10 +111,6 @@ public class Loan {
 
         this.term = calculateLoanTerm();
         this.principal = this.amount / ((this.rate * 0.01 * this.term) + 1);
-    }
-
-    public void calculatePrincipalCustom(){
-        this.principal = this.interest/(this.rate/100);
     }
 
 }

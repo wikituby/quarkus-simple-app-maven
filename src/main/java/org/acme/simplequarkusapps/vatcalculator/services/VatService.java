@@ -37,22 +37,6 @@ public class VatService {
         vatObj.calculateTotalAmount();
         return vatObj;
     }
-    
 
-    public String vatInfo() {
-        Vat vatObj = new Vat();
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            // Create a JSON object with a single property
-            Object json = objectMapper.createObjectNode().put("vatInfo", vatObj.getVatInfo());
 
-            // Convert the JSON object to a formatted JSON string
-            String jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
-
-            System.out.println(jsonString);
-            return jsonString;
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

@@ -10,12 +10,11 @@ public class Vat {
     private double vatAmount;
     private double totalAmount;
     private double vatRate;
-    private String currency;
+    private String currency = "UGX";
     public String vatInfo = """
-
             VAT Rates and General Info.
-            VAT (Value Added Tax) is a consumption tax imposed on the sale of goods and services. The method for calculating VAT may vary depending on the country or region. Generally, VAT is calculated as a percentage of the price of the goods or services.\n              
-            In Uganda, the Value Added Tax (vatAmount) is a consumption tax levied on the supply of goods and services.\nThe standard vatAmount rate in Uganda is currently set at 18%. 
+            VAT (Value Added Tax) is a consumption tax imposed on the sale of goods and services. The method for calculating VAT may vary depending on the country or region. Generally, VAT is calculated as a percentage of the price of the goods or services.             
+            In Uganda, the Value Added Tax (vatAmount) is a consumption tax levied on the supply of goods and services. The standard vatAmount rate in Uganda is currently set at 18%. 
             """;
 
     // constructors
@@ -94,6 +93,8 @@ public class Vat {
     public void calculateTaxableAmount() {
         this.vatRate = 0.18;
         this.taxableAmount = this.vatAmount/this.vatRate;
+        this.totalAmount = this.taxableAmount + this.vatAmount;
+
     }
 
     public void calculateTotalAmount() {

@@ -6,16 +6,8 @@ import org.acme.simplequarkusapps.loancalculator.statics.TimeInterval;
 public class TimeOption {
 
     private double time;
-    private String invalidOption = "invalid Input";
 
     private TimeInterval period;
-
-    public String getInvalidOption(){
-        return invalidOption;
-    }
-    public void setInvalidOption(String invalidOption){
-        this.invalidOption = invalidOption;
-    }
 
     public TimeInterval getPeriod() {
 

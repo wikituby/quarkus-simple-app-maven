@@ -110,7 +110,6 @@ public class Loan1 {
         this.years = years;
     }
 
-
     public double getPrincipal() {
         return principal;
     }
@@ -207,7 +206,6 @@ public class Loan1 {
         this.ratePerMonth = ratePerMonth;
     }
 
-
     //all interest calculations together
     public void CalculateAllInterestAttributes(){
         this.interestPerMonth = (this.ratePerMonth / 100) * this.principal;
@@ -225,11 +223,7 @@ public class Loan1 {
         this.totalInterestInGivenPeriod = this.interestPerDays + this.interestPerWeeks + this.interestPerMonths + this.interestPerYears;
 
         this.totalLoanAmount=this.principal+this.totalInterestInGivenPeriod;
-
-
     }
-
-
    /*
     public void calculateInterestPerMonths() {
         this.interestPerMonth = (this.ratePerMonth/100) * this.principal;

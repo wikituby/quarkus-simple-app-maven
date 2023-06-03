@@ -92,16 +92,26 @@ public class Nssf {
     public void calculateNetPay() {
         this.employeeNssfContribution = EMPLOYEE_RATE * this.grossPay;
         this.netPay = this.grossPay - this.employeeNssfContribution;
+        this.employerNssfContribution = EMPLOYER_RATE*this.grossPay;
+        this.nssfTotalContribution = this.employeeNssfContribution+this.employerNssfContribution;
     }
 
     public void calculateNssfContribution() {
         this.employeeNssfContribution = EMPLOYEE_RATE * this.grossPay;
         this.employerNssfContribution = EMPLOYER_RATE * this.grossPay;
         this.nssfTotalContribution = this.employeeNssfContribution + employerNssfContribution;
+        this.netPay=this.grossPay-this.employeeNssfContribution;
     }
 
     public void calculateGrossPay(){
         this.grossPay=this.employerNssfContribution/this.EMPLOYER_RATE;
+        this.employeeNssfContribution = EMPLOYEE_RATE*this.grossPay;
+        this.employerNssfContribution = EMPLOYER_RATE*this.grossPay;
+        this.nssfTotalContribution = this.employeeNssfContribution + employerNssfContribution;
+        this.netPay=this.grossPay-this.employeeNssfContribution;
+
+
+
     }
 
 

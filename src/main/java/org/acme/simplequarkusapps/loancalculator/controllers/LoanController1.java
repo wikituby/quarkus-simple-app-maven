@@ -12,7 +12,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 
 
-@Path("/interest")
+//@Path("/interest")
 @Tag(name = "Loan  - Calculator", description = "This will calculate loan")
 public class LoanController1 {
 
@@ -20,7 +20,7 @@ public class LoanController1 {
     LoanService1 loanService;
 
     @GET
-    @Path("/interest-in-given-period")
+    //@Path("/interest-in-given-period")
     @Operation(summary = "calculate interest in a given period", description = "This will calculate interest in any time period given.Make sure you provide the principal amount and the interest rate per month, then fill in the time or period, eg: how many months and weeks and days or years")
     @Produces(MediaType.APPLICATION_JSON)
     public String InterestInGivenPeriod(
@@ -35,7 +35,7 @@ public class LoanController1 {
         return loanService.calculateInterest(principal, ratePerMonth, years, months, weeks, days);
     }
     @GET
-    @Path("/principal")
+    //@Path("/principal")
     @Operation(summary = "calculate interest principal", description = "calculate principal ")
     @Produces(MediaType.APPLICATION_JSON)
     public String calculatePrincipal(
@@ -46,7 +46,7 @@ public class LoanController1 {
 
     @GET
     @Operation(summary = "calculate rate per month", description = "calculate principal ")
-    @Path("/rate-per-month")
+    //@Path("/rate-per-month")
     @Produces(MediaType.APPLICATION_JSON)
     public String calculateRatePerMonth(
             @QueryParam("interestPerMonth") double interestPerMonth,
