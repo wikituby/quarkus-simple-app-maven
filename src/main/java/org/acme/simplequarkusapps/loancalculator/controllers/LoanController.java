@@ -4,7 +4,6 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.acme.simplequarkusapps.loancalculator.models.Loan;
-import org.acme.simplequarkusapps.loancalculator.models.TimeOption;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.acme.simplequarkusapps.loancalculator.services.LoanService;
