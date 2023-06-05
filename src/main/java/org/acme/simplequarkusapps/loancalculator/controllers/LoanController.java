@@ -43,7 +43,7 @@ public class LoanController {
     @Operation(summary = "principal", description = "Rate from given Amount.")
     @Produces(MediaType.APPLICATION_JSON)
     public Loan calculatePrincipal(
-            @QueryParam("rate per month(%)") double rate,
+            @QueryParam("ratePerMonth(%)") double rate,
             @QueryParam("amount") double amount,
             @QueryParam("intervalOption") int intervalOption,
             @QueryParam("time") int time) {

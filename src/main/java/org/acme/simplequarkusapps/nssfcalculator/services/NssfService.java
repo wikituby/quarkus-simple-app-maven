@@ -10,14 +10,14 @@ public class NssfService {
 
 
 
-    /*public String nssfRatesAndInfo() {
+    public String nssfRatesAndInfo() {
         Nssf nssfObj = new Nssf();
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            // Create a JSON object with a single property
+            //Create a JSON object with a single property
             Object json = objectMapper.createObjectNode().put("nssInfo", nssfObj.getNssInfo());
 
-            // Convert the JSON object to a formatted JSON string
+            //Convert the JSON object to a formatted JSON string
             String jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
 
             System.out.println(jsonString);
@@ -25,7 +25,7 @@ public class NssfService {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
 
     public Nssf calculateNssfContribution(double grossPay) {
         Nssf nssfObj = new Nssf();

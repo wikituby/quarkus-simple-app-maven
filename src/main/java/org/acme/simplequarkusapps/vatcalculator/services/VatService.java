@@ -38,5 +38,16 @@ public class VatService {
         return vatObj;
     }
 
-
+    public String vatRatesAndInfo() {
+        Vat vatObj = new Vat();
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            Object json = objectMapper.createObjectNode().put("vatInfo", vatObj.getVatInfo());
+            String jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
+            System.out.println(jsonString);
+            return jsonString;
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
