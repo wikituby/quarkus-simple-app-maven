@@ -3,8 +3,6 @@ package org.acme.simplequarkusapps.loancalculator.services;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.acme.simplequarkusapps.loancalculator.models.Loan1;
 
-
-
 @ApplicationScoped
 public class LoanService1 {
 

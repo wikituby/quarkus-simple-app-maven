@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Endpoint Example</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h4>Tickets</h4>
+  <div id="responseContainer">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Category</th>
+        <th>SubCategory</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody id="dataBody">
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $.ajax({
+          url: "http://192.168.100.37:8080/support/ticket/get-all", // Replace with the actual endpoint you want to connect to
+          method: "GET",
+          success: function(response) {
+            // Clear existing rows
+            $("#dataBody").empty();
+
+            // Iterate through the response data and generate table rows
+            for (var i = 0; i < response.length; i++) {
+              var row = "<tr>";
+              row += "<td>" + response[i].id + "</td>";
+              row += "<td>" + response[i].title + "</td>";
+              row += "<td>" + response[i].category + "</td>";
+              row += "<td>" + response[i].subCategory + "</td>";
+              row += "<td>" + response[i].description + "</td>";
+
+              row += "</tr>";
+              $("#dataBody").append(row);
+            }
+          },
+          error: function(xhr, status, error) {
+            $("#dataBody").html("<tr><td colspan='3'>Error: " + status + " - " + error + "</td></tr>");
+          }
+        });
+      });
+
+  </script>
+</body>
+</html>

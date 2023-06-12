@@ -35,6 +35,24 @@ public class VatController {
     public Vat calculateVatAmount(@QueryParam("netAmount") double taxableAmount) {
         return vatService.calculateVatAmount(taxableAmount);
     }
+/*
+    @GET
+    @Path("/amount")
+    @Operation(summary = "calculates vat amount on goods and services", description = "calculates vat amount on goods and services in uganda.")
+    @APIResponse(description = "Successful", responseCode = "200")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Vat calculateVatAmount(@QueryParam("netAmount") double taxableAmount) {
+        return vatService.calculateVatAmount(taxableAmount);
+    }
+    */
+    /*@GET
+    @Path("/taxable-amount")
+    @Operation(summary = "calculates Taxable amount/net amount before vat additions", description = "calculates Taxable amount before vat A mount additions.")
+    @APIResponse(description = "Successful", responseCode = "200")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Vat calculateTaxableAmount(@QueryParam("vatAmount") double vatAmount) {
+        return vatService.calculateTaxableAmount(vatAmount);
+    }*/
 
     @GET
     @Path("/taxable-amount")
@@ -44,7 +62,6 @@ public class VatController {
     public Vat calculateTaxableAmount(@QueryParam("vatAmount") double vatAmount) {
         return vatService.calculateTaxableAmount(vatAmount);
     }
-
     @GET
     @Path("/total-amount")
     @Operation(summary = "calculates Total amount/gross amount ie Taxable amount plus Vat Amount", description = "calculates total amount ie Taxable amount plus vat amount.")
@@ -53,7 +70,6 @@ public class VatController {
     public Vat calculateTotalAmount(@QueryParam("vatAmount") double vatAmount) {
         return vatService.calculateTotalAmount(vatAmount);
     }
-
     @POST
     @Path("/rate")
     @Operation(summary = "calculates the vat rate(%)", description = "calculates the vat rate(%) of the gross amount.")

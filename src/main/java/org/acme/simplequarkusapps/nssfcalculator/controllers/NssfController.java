@@ -1,12 +1,12 @@
 package org.acme.simplequarkusapps.nssfcalculator.controllers;
 
 import jakarta.inject.Inject;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.acme.simplequarkusapps.nssfcalculator.models.Nssf;
+import org.acme.simplequarkusapps.nssfcalculator.models.NssfRequestContributions;
+import org.acme.simplequarkusapps.nssfcalculator.models.NssfRequestGrossPay;
+import org.acme.simplequarkusapps.nssfcalculator.models.NssfRequestNetPay;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.acme.simplequarkusapps.nssfcalculator.services.NssfService;
@@ -27,28 +27,29 @@ public class NssfController {
         return nssfService.nssfRatesAndInfo();
     }
 
-    @GET
+    @POST
     @Path("/contributions")
     @Operation(summary = "This calculates nssf contributions for employee and employer", description = "This calculates nssf contributions for employee and employer and the total nssf contribution")
     @Produces(MediaType.APPLICATION_JSON)
-    public Nssf calculateNssfContribution(@QueryParam("grossPay") double grossPay) {
-        return nssfService.calculateNssfContribution(grossPay);
+    public Nssf calculateNssfContribution(NssfRequestContributions request) {
+        return nssfService.calculateNssfContribution(request);
+
     }
 
-    @GET
+    @POST
     @Path("/employee-gross-pay")
     @Operation(summary = "This calculates employees grossPay", description = "This calculates employees grossPay.")
     @Produces(MediaType.APPLICATION_JSON)
-    public Nssf calculateGrossPay(@QueryParam("employerNssfContribution") double employerNssfContribution) {
-        return nssfService.calculateGrossPay(employerNssfContribution);
+    public Nssf calculateGrossPay(NssfRequestGrossPay request) {
+        return nssfService.calculateGrossPay(request);
     }
 
-    @GET
+    @POST
     @Path("/employee-net-pay")
     @Operation(summary = "This calculates employees netPay after nssf deduction", description = "This calculates employees netPay after nssf deduction.")
     @Produces(MediaType.APPLICATION_JSON)
-    public Nssf calculateNetPay(@QueryParam("grossPay") double grossPay) {
-        return nssfService.calculateNetPay(grossPay);
+    public Nssf calculateNetPay(NssfRequestNetPay request) {
+        return nssfService.calculateNetPay(request);
     }
 
 }

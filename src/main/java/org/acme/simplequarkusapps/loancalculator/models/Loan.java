@@ -6,36 +6,36 @@ import org.acme.simplequarkusapps.loancalculator.statics.TimeInterval;
 @ApplicationScoped
 public class Loan {
 
-    private double amount;
+    private double totalAmount;
 
     private double term; // in months
 
     private double rate;
 
-    private double interest;
+    private double totalInterest;
 
     private double principal;
 
     private TimeOption timeOption;
 
-    public double getAmount() {
+    public double getTotalAmount() {
 
-        return amount;
+        return totalAmount;
     }
 
-    public void setAmount(double amount) {
+    public void setTotalAmount(double totalAmount) {
 
-        this.amount = amount;
+        this.totalAmount = totalAmount;
     }
 
-    public double getInterest() {
+    public double getTotalInterest() {
 
-        return interest;
+        return totalInterest;
     }
 
-    public void setInterest(double interest) {
+    public void setTotalInterest(double totalInterest) {
 
-        this.interest = interest;
+        this.totalInterest = totalInterest;
     }
 
     public double getPrincipal() {
@@ -81,8 +81,8 @@ public class Loan {
     public void calculateLoanAmount() {
 
         this.term = calculateLoanTerm();
-        this.interest = this.principal * (this.rate * 0.01) * this.term;
-        this.amount = this.principal + this.interest;
+        this.totalInterest = this.principal * (this.rate * 0.01) * this.term;
+        this.totalAmount = this.principal + this.totalInterest;
     }
 
     private double calculateLoanTerm() {
@@ -103,14 +103,17 @@ public class Loan {
 
         this.term = calculateLoanTerm();
         if (this.term != 0) {
-            this.rate = ((this.amount - this.principal) / (this.principal * this.term)) * 100;
+            this.rate = ((this.totalAmount - this.principal) / (this.principal * this.term)) * 100;
+            this.totalInterest = this.totalAmount-this.principal;
         }
     }
 
     public void calculatePrincipal() {
 
         this.term = calculateLoanTerm();
-        this.principal = this.amount / ((this.rate * 0.01 * this.term) + 1);
+        this.principal = this.totalAmount / ((this.rate * 0.01 * this.term) + 1);
+        this.totalInterest = this.totalAmount-this.principal;
+
     }
 
 }

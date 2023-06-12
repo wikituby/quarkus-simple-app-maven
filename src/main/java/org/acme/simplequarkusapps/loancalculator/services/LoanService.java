@@ -1,8 +1,7 @@
 package org.acme.simplequarkusapps.loancalculator.services;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import org.acme.simplequarkusapps.loancalculator.models.Loan;
-import org.acme.simplequarkusapps.loancalculator.models.TimeOption;
+import org.acme.simplequarkusapps.loancalculator.models.*;
 import org.acme.simplequarkusapps.loancalculator.statics.TimeInterval;
 
 
@@ -15,14 +14,14 @@ public class LoanService {
 
     }
 
-    public Loan calculateMonthlyPayments(double principal, double rate, int intervalOption, int time ) {
+    public Loan calculateMonthlyPayments(LoanRequestMonthlyPayments request ) {
         Loan calculator = new Loan();
-        calculator.setPrincipal(principal);
-        calculator.setRate(rate);
+        calculator.setPrincipal(request.getPrincipal());
+        calculator.setRate(request.getRate());
 
         TimeOption timeOption = new TimeOption();
 
-        switch (intervalOption) {
+        switch (request.getIntervalOption()) {
             case 1 -> timeOption.setPeriod(TimeInterval.YEARLY);
             case 2 -> timeOption.setPeriod(TimeInterval.MONTHLY);
             case 3 -> timeOption.setPeriod(TimeInterval.WEEKLY);
@@ -30,21 +29,21 @@ public class LoanService {
             default -> invalidOption();
         }
 
-        timeOption.setTime(time);
+        timeOption.setTime(request.getTime());
         calculator.setTimeOption(timeOption);
         calculator.calculateLoanAmount();
 
         return calculator;
     }
 
-    public Loan calculateRateFromGivenAmount(double principal, double amount, int intervalOption, int time ) {
+    public Loan calculateRateFromGivenAmount(LoanRequestRate requestRate ) {
         Loan calculator = new Loan();
-        calculator.setPrincipal(principal);
-        calculator.setAmount(amount);
+        calculator.setPrincipal(requestRate.getPrincipal());
+        calculator.setTotalAmount(requestRate.getTotalAmount());
 
         TimeOption timeOption = new TimeOption();
 
-        switch (intervalOption) {
+        switch (requestRate.getIntervalOption()) {
             case 1 -> timeOption.setPeriod(TimeInterval.YEARLY);
             case 2 -> timeOption.setPeriod(TimeInterval.MONTHLY);
             case 3 -> timeOption.setPeriod(TimeInterval.WEEKLY);
@@ -52,21 +51,21 @@ public class LoanService {
             default -> invalidOption();
         }
 
-        timeOption.setTime(time);
+        timeOption.setTime(requestRate.getTime());
         calculator.setTimeOption(timeOption);
         calculator.calculateRate();
 
         return calculator;
     }
 
-    public Loan calculatePrincipal(double rate, double amount, int intervalOption, int time ) {
+    public Loan calculatePrincipal(LoanRequestPrincipal request ) {
         Loan calculator = new Loan();
-        calculator.setRate(rate);
-        calculator.setAmount(amount);
+        calculator.setRate(request.getRate());
+        calculator.setTotalAmount(request.getTotalAmount());
 
         TimeOption timeOption = new TimeOption();
 
-        switch (intervalOption) {
+        switch (request.getIntervalOption()) {
             case 1 -> timeOption.setPeriod(TimeInterval.YEARLY);
             case 2 -> timeOption.setPeriod(TimeInterval.MONTHLY);
             case 3 -> timeOption.setPeriod(TimeInterval.WEEKLY);
@@ -74,7 +73,7 @@ public class LoanService {
             default -> invalidOption();
         }
 
-        timeOption.setTime(time);
+        timeOption.setTime(request.getTime());
         calculator.setTimeOption(timeOption);
         calculator.calculatePrincipal();
 
