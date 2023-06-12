@@ -1,9 +1,12 @@
 package org.acme.simplequarkusapps.loancalculator.controllers;
 
+import io.smallrye.common.constraint.NotNull;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import org.acme.simplequarkusapps.loancalculator.models.Loan;
+import jakarta.ws.rs.core.Response;
+import org.acme.simplequarkusapps.loancalculator.handler.MessagesResponse;
+import org.acme.simplequarkusapps.loancalculator.handler.ResponseMessage;
 import org.acme.simplequarkusapps.loancalculator.models.LoanRequestMonthlyPayments;
 import org.acme.simplequarkusapps.loancalculator.models.LoanRequestPrincipal;
 import org.acme.simplequarkusapps.loancalculator.models.LoanRequestRate;
@@ -14,7 +17,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 @Path("/loan")
 @Tag(name = "Loan  - Calculator", description = "This will calculate interest in any time period given")
-public class LoanControllerEdit {
+public class LoanControllerV4 {
 
     @Inject
     LoanService loanService;
@@ -23,22 +26,25 @@ public class LoanControllerEdit {
     @Path("/monthly-payments")
     @Operation(summary = "monthly-payments", description = "This will calculate interest in any time period given.")
     @Produces(MediaType.APPLICATION_JSON)
-    public Loan calculateMonthlyPayments(LoanRequestMonthlyPayments request) {
-        return loanService.calculateMonthlyPayments(request);
+    public Response calculateMonthlyPayments(@NotNull LoanRequestMonthlyPayments request) {
+        return Response.ok(new ResponseMessage(MessagesResponse.SAVED.label,
+                loanService.calculateMonthlyPayments(request))).build();
     }
     @POST
     @Path("/rate-from-given-amount")
     @Operation(summary = "Rate from given Amount", description = "Rate from given Amount.")
     @Produces(MediaType.APPLICATION_JSON)
-    public Loan calculateRateFromGivenAmount(LoanRequestRate requestRate) {
-        return loanService.calculateRateFromGivenAmount(requestRate);
+    public Response calculateRateFromGivenAmount(@NotNull LoanRequestRate requestRate) {
+        return Response.ok(new ResponseMessage(MessagesResponse.SAVED.label,
+                loanService.calculateRateFromGivenAmount(requestRate))).build();
     }
     @POST
     @Path("/principal")
     @Operation(summary = "principal", description = "Rate from given Amount.")
     @Produces(MediaType.APPLICATION_JSON)
-    public Loan calculatePrincipal(LoanRequestPrincipal request) {
-        return loanService.calculatePrincipal(request);
+    public Response calculatePrincipal(@NotNull LoanRequestPrincipal request) {
+        return Response.ok(new ResponseMessage(MessagesResponse.SAVED.label,
+                loanService.calculatePrincipal(request))).build();
     }
 
 
